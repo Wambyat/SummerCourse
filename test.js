@@ -1,4 +1,3 @@
-import dotenv from 'dotenv';
 const thingy = require('dotenv');
 thingy.config();
 
