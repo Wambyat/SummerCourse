@@ -1,14 +1,16 @@
 <!doctype html>
 <html>
-
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
+	<script src="env.js"></script>
+	<script type="module" src="index.js"></script>
+	
 	<head>
 		<title>Movie Pitch</title>
-		<meta name="viewport" content="width=device-width, initial-scale=1">
-		<link rel="preconnect" href="https://fonts.googleapis.com">
-		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-		<link href="https://fonts.googleapis.com/css2?family=Playfair+Display+SC:wght@700&family=Poppins:wght@400;700&display=swap"
-		rel="stylesheet">
-		<link rel="stylesheet" href="index.css">
+		<meta name="viewport" content="width=device-width, initial-scale=1" />
+		<link rel="preconnect" href="https://fonts.googleapis.com" />
+		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+		<link href="https://fonts.googleapis.com/css2?family=Playfair+Display+SC:wght@700&family=Poppins:wght@400;700&display=swap" rel="stylesheet" /> 
+		<link rel="stylesheet" href="index.css" />
 	</head>
 
 	<body>
@@ -20,18 +22,17 @@
 			<!-- The Setup -->	
 			<section id="setup-container">
 				<div class="setup-inner">
-					<img src="images/Person.png" alt="Person">
+					<img src="./images/Person.png"> 
 					<div class="speech-bubble-ai" id="speech-bubble-ai">
 						<p id="movie-boss-text">
-							Movie Idea NOW!!!
+							Give me a one-sentence concept and I'll give you an eye-catching title, a synopsis the studios will love, a movie poster...
 						</p>
 					</div>
 				</div>
 				<div class="setup-inner setup-input-container" id="setup-input-container">
-					<textarea id="API_KEY" placeholder="API_KEY"></textarea>
-					<textarea id="setup-textarea" placeholder="Your stupid idea goes here"></textarea>
+					<textarea id="setup-textarea" placeholder="An evil genius wants to take over the world using AI."></textarea>
 					<button class="send-btn" id="send-btn" aria-label="send">
-							<img src="images/send.png" alt="send">
+							<img src="./images/send-btn-icon.png" alt="send">
 					</button>
 				</div>
 			</section>	
@@ -44,8 +45,9 @@
 			</section>
 		</main>	
 		<footer>
-			&copy; Ooga Booga Inc.
+			&copy; 2023 MoviePitch All rights reserved
 		</footer>
-		<script type="module" src="index.js"></script>
+		
 	</body>
+
 </html>
