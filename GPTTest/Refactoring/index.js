@@ -9,10 +9,6 @@ const outputStars = document.getElementById('output-stars')
 const url = "https://api.openai.com/v1/completions"
 
 
-function makeOutput(title, syn, stars) {
-  outputText.innerText = "Title: "+title+"\n"+"Synopsis: "+syn+"\n"+"Stars: "+stars;
-}
-
 async function fetchBotReply(prompt) {
   var prompttext = prompt;
   console.log("start");
