@@ -1,0 +1,80 @@
+<!doctype html>
+<html>
+	<head>
+		<title>Foodie Thingy</title>
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<link rel="preconnect" href="https://fonts.googleapis.com">
+		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+		<link href="https://fonts.googleapis.com/css2?family=Playfair+Display+SC:wght@700&family=Poppins:wght@400;700&display=swap"
+		rel="stylesheet">
+		<link rel="stylesheet" href="index.css">
+	</head>
+
+	<body>
+		<header>
+			<!-- <img src="Movie_Star.jpg" alt="MoviePitch"> -->
+			<a href="/"><span>Movie</span>Pitch</a>
+		</header>
+		<main>	
+			<!-- The Setup -->	
+			<section id="setup-container">
+				<div class="setup-inner">
+					<img src="./images/Person.png">
+					<div class="speech-bubble-ai" id="speech-bubble-ai">
+						<p id="movie-boss-text">
+							Tell me how you feel and I'll suggest a suitable food!
+						</p>
+					</div>
+				</div>
+				<label for="fellings">How are you feeling?</label>
+				<div class="feelings" id = "feelings">
+					<!-- make a list of selectable options about mood-->
+					<input type='checkbox' id="feelings-type-1" value="Nauseous">Nauseous</checkbox>
+					<input type='checkbox' id="feelings-type-2" value="Hungry">Hungry</checkbox>
+					<input type='checkbox' id="feelings-type-3" value="Depressed">Depressed</checkbox>
+					<input type='checkbox' id="feelings-type-4" value="Cold/Cough">Cold/Cough</checkbox>
+					<input type='checkbox' id="feelings-type-5" value="Happy">Happy</checkbox>
+					<input type='checkbox' id="feelings-type-6" value="Sad">Sad</checkbox>
+				</div>
+				<label for="fellings">What kind of food whould you like to eat?</label>
+				<div class="feelings" id = "feelings">
+					<input type='checkbox' id="food-type-1" value = "Nostalgic">Nostalgic</checkbox>
+					<input type='checkbox' id="food-type-2" value = "Comforting">Comforting</checkbox>
+					<input type='checkbox' id="food-type-3" value = "Energizing">Energizing</checkbox>
+					<input type='checkbox' id="food-type-4" value = "Indulgent">Indulgent</checkbox>
+					<input type='checkbox' id="food-type-5" value = "Filling">Filling</checkbox>
+					<input type='checkbox' id="food-type-6" value = "Exotic">Exotic</checkbox>
+				</div>
+				<div>
+					<label for="location">Where are you? What's the weather like?</label>
+					<textarea id="loc-text" placeholder="Type here"></textarea>
+				</div>
+				<label for="setup-textarea">Anything else you want to tell me?</label>
+				<div class="setup-inner setup-input-container" id="setup-input-container">
+					
+					<textarea id="setup-textarea"></textarea>
+					<button class="send-btn" id="send-btn" aria-label="send">
+							<img src="./images/send.png" alt="send">
+					</button>
+				</div>
+			</section>	
+			<!-- The Output -->	
+			<section class="output-container" id="output-container">
+				<div id="output-img-container" class="output-img-container"></div>
+				<h1 id="output-title"></h1>
+				<h2 id="output-stars"></h2>
+				<p id="output-text"></p>
+			</section>
+		</main>	
+		<footer>
+			&copy; 2023 MoviePitch All rights reserved
+		</footer>
+		<script type="module" src="index.js"></script>
+		<!-- Include the jQuery library -->
+		<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+		<!-- Include the env.js file -->
+		<script src="env.js"></script>
+	</body>
+
+</html>
