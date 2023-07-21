@@ -78,14 +78,20 @@ async function fetchBotReply(prompt){
         'model': 'text-davinci-003',
         'prompt': `Generate feedback to enthusiastically say an outline looks interesting and that you need some minutes to think about it.
         ###
-        outline: Two dogs fall in love and move to hawaii and learn to surf
-        message: i will need to think about that but the idea is amazing. i love the bit about hawaii.
+        outline : Generate a food suggestion based on the below feelings such as I live in bengaluru  and the temperature here is 20 degrees celsius , I feel Depressed,Cold/Cough and want to eat Energizing food.  i have thyroid.say only the name of the food dont say anything else.
+        message : Quinoa Salad
         ###
-        outline: a plane crashes in the jungle and passengers have to walk 100 kms to safety
-        message: i'll spend a few moments considering that but i love your ideea. a disaster movie in the jungle.
+        outline : Generate a food suggestion based on the below feelings such as I live in delhi and the temperature here is 10 degrees celsius , I feel Nauseous,Sad and want to eat Comforting food.  i want high protein food.say only the name of the food dont say anything else
+        message : Chicken Soup
         ###
-        outline:a group of corrupt lawyers trying to dsenf an innocent women to jail.
-        message: now that is awesome! corrupt lawyers huh? give me a few moments to think.
+        outline : Generate a food suggestion based on the below feelings such as I live in gujarat and the temperature here is 34 degrees celsius , I feel Hungry,Happy and want to eat Filling food.  i want junk food.say only the name of the food dont say anything else
+        message : Pav Bhaji
+        ###
+        outline : Generate a food suggestion based on the below feelings such as I live in kashmir and the temperature here is 07 degrees celsius , I feel Cold/Cough and want to eat Comforting food.  i want something hot and spicy.say only the name of the food dont say anything else
+        message : Kashmiri Kahwa
+        ###
+        outline : Generate a food suggestion based on the below feelings such as I live in mysore and the temperature here is 29 degrees celsius , I feel Sad and want to eat Indulgent food.  ntg.say only the name of the food dont say anything else
+        message : Chocolate Brownie
         ###
         outline: 
         message: ${prompttext} `,
@@ -124,7 +130,23 @@ async function fetchImagePrompt(food) {
       },
       body: JSON.stringify({
         'model': 'text-davinci-003',
-        'prompt': `Give a short description of an image that could be used to describe the following food: ${food}`,
+        ###
+        outline : Generate a appetizing description of Maggi 
+        message : A mouthwatering image of Maggi captures slender noodles bathed in a rich golden broth, adorned with vibrant vegetable accents, promising a comforting and delicious experience. The sight entices with its inviting warmth and enticing flavors.
+        ###
+        outline : Generate a appetizing description of biriyani
+        message : A tantalizing picture of biryani showcases fragrant, spiced rice adorned with succulent pieces of tender meat or flavorful vegetables, exuding an irresistible aroma that promises a delightful culinary adventure. The vibrant colors and enticing presentation beckon one to savor the harmonious blend of flavors in this beloved dish.
+        ###
+        outline : Generate a appetizing description of samosa
+        message : A captivating image of samosa presents golden-brown, crispy pastry enveloping a savory filling of spiced potatoes and peas, enticing the taste buds with its crunchy exterior and flavorful interior. The aromatic spices and delightful shape make it an irresistible snack that promises a delightful burst of flavors in every bite.
+        ###
+        outline : Generate a appetizing description of jalebi
+        message : In a tempting portrayal, jalebi graces the frame with its intricate swirls of golden sweetness, enticing the eye with its vibrant hue and glistening syrup. The delectable, crispy yet syrupy texture promises a mouthwatering indulgence, leaving a trail of delightful sugary bliss on the taste buds.                   
+        ###
+        outline : Generate a appetizing description of kulfi
+        message : A captivating picture of kulfi showcases a luscious, creamy dessert, adorned with chopped nuts and saffron strands, enticing one with its rich and indulgent appearance. The frozen treat promises a delightful escape into a world of exquisite flavors, offering a refreshing and satisfying respite from the heat.
+        ### 
+        'prompt': `Generate a appetizing description of ${food}`,
         temperature: 0.8,
         max_tokens: 100
       })
