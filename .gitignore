@@ -3,3 +3,5 @@ key.txt
 .env
 GPTTest/Refactoring/env.js
 GPTTest/latest shiy/env.js
+GPTTest/imagegen/env.js
+GPTTest/PROJ/env.js
