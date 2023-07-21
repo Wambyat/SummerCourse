@@ -3,8 +3,11 @@ const setupInputContainer = document.getElementById('setup-input-container')
 const movieBossText = document.getElementById('movie-boss-text')
 const setuploading = document.getElementById('output-container')
 const locText = document.getElementById('loc-text')
-const OPEN_API_KEY = process.env.OPENAI_API_KEY;
+const OPENAI_API_KEY0 = process.OPENAI_API_KEY0;
+const OPENAI_API_KEY1 = process.OPENAI_API_KEY1;
+const OPENAI_API_KEY2 = process.OPENAI_API_KEY2;
 const url = 'https://api.openai.com/v1/completions'
+const url1 = 'https://api.openai.com/v1/images/generations'
 
 $(window).on('load',function(){
     $("#output-container").css('display','block');
@@ -30,20 +33,32 @@ document.getElementById("send-btn").addEventListener("click", () => {
   console.log(locText.value);
   console.log(otherThings);
   console.log(feelings);
+
+  var prompt =  "Generate a food suggestion based on the below feelings such as I live in "+ locText.value + " and the temperature here is 20 degrees celsius , I feel " + feelings + " and want to eat " + foodType +" food.  "+ otherThings + ".say only the name of the food dont say anything else"
+
+  console.log(prompt)
   
-  // fetchBotReply(otherThings)
-  // fetchSynopsis(otherThings)
+  fetchBotReply(prompt).then((botReply) => {
+    var food = botReply;
+    fetchImagePrompt(food).then((botReply) => {
+      var img_desc = botReply;
+      console.log("Image description is "+img_desc)
+      console.log("Food is "+food)
+      fetchImageUrl(img_desc).then(() => {
+        console.log("Image generated");
+      })
+    })
+  })
 })
 
 async function fetchBotReply(prompt){
     //var prompttext = $("#setup-textarea").val();
     var prompttext = prompt;
-    console.log(prompttext)
     fetch(url,{
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
-        'Authorization': `Bearer ${OPEN_API_KEY}`
+        'Authorization': `Bearer ${OPENAI_API_KEY0}`
       },
       body: JSON.stringify({
         'model': 'text-davinci-003',
@@ -58,38 +73,77 @@ async function fetchBotReply(prompt){
         outline:a group of corrupt lawyers trying to dsenf an innocent women to jail.
         message: now that is awesome! corrupt lawyers huh? give me a few moments to think.
         ###
-        outline: ${prompttext}
-        message: `,
+        outline: 
+        message: ${prompttext} `,
         'max_tokens' : 100,
       })
     }).then(response => response.json()).then(data =>{
         setTimeout(function(){
-            //$("#output-container").css('display','block');
-            document.getElementById('movie-boss-text').innerText=data.choices[0].text
+            return data.choices[0].text
+        },1000)
+      }
+    )
+}
 
-        },1000)}
-    
-    )}
+async function fetchAPI(url, options) {
+  const response = await fetch(url, options);
+  if (response.status === 429) {
+    // Handle rate limit by waiting and retrying the request after a delay
+    const retryAfter = parseInt(response.headers.get('Retry-After')) || 1;
+    await sleep(retryAfter * 1000);
+    return fetchAPI(url, options); // Retry the request
+  }
+  return response;
+}
 
-async function fetchSynopsis(prompt){
-    //var prompttext = $("#setup-textarea").val();
-    var prompttext = prompt;
+function sleep(ms) {
+  return new Promise(resolve => setTimeout(resolve, ms));
+}
 
-    fetch(url,{
+async function fetchImagePrompt(food) {
+  try {
+    console.log("food is "+food)
+    const response = await fetchAPI(url, {
       method: 'POST',
       headers: {
-        'Content-Type': 'application/json',
-        'Authorization': `Bearer ${OPEN_API_KEY}`
+        "Content-Type": "application/json",
+        "Authorization": "Bearer " + OPENAI_API_KEY0
       },
       body: JSON.stringify({
         'model': 'text-davinci-003',
-        'prompt': "Generate a professional,emotional and market combined good movie story regarding " + prompttext + " what do you think? ",
-        'max_tokens' : 600,
+        'prompt': `Give a short description of an image that could be used to describe the following food: ${food}`,
+        temperature: 0.8,
+        max_tokens: 100
       })
-    }).then(response => response.json()).then(data =>{
-        setTimeout(function(){
-            //$("#output-container").css('display','block');
-            document.getElementById('output-container').innerText=data.choices[0].text
-        },1000)}
-    
-    )}
+    });
+    const data = await response.json();
+    const imagePrompt = data.choices[0].text.trim();
+    return imagePrompt;
+  } catch (error) {
+    console.error("Error:", error);
+  }
+}
+
+async function fetchImageUrl(imagePrompt){
+  const requestOptions = {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+      'Authorization': `Bearer ${OPENAI_API_KEY0}`
+    },
+    body: JSON.stringify({
+      prompt:`${imagePrompt}. There should be no text in this image.`,
+      n: 1,
+      size: '512x512',
+      response_format: 'b64_json'
+    })
+  };
+  fetch(url1, requestOptions)
+  .then(response => response.json())
+  .then(data => {
+    if (data.data && data.data.length > 0) {
+      document.getElementById('output-img-container').innerHTML = `<img src="data:image/png;base64,${data.data[0].b64_json}">`;
+      document.getElementById("output-title").innerHTML = imagePrompt;
+    }
+  })
+}

@@ -1,109 +1,119 @@
 :root {
+    /* Your color variables */
     --white: #ffffff;
-    --light: whitesmoke;
-    --light-grey: #e8e8e8;
+    --light: #f5f5f5;
     --pink: #ff176b;
-    --medium-dark: #777;
     --dark: #242526;
+    --medium-dark: #d6c7c7e3;
     --border-rad-lg: 15px;
-}
-
-html, body {
+    --purple:#d117ff;
+    --green:#5dca36;
+    --blue:#4ebeef;
+    --Cashmere:#5dabf4;
+  }
+  
+  html, body {
     margin: 0;
     padding: 0;
     font-size: 16px;
-}
-
-body {
-    font-family: 'Poppins';
-    background-size: cover;
-    background-repeat: repeat-y;
-    background-image: url('');
+  }
+  
+  body {
+    font-family: 'Poppins', sans-serif;
+    background-color: var(--medium-dark);
     height: 100vh;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
-}
-
-/* =================
-      Typography 
-     ================= */
-
-h1 {
+    margin: 0;
+  }
+  
+  label[for="fellings"] + label[for="feelings"] {
+    margin-top: 1rem;
+  }
+  /* =================
+        Typography 
+       ================= */
+  
+  h1 {
     font-family: 'Playfair Display SC', serif;
     text-align: center;
-}
-
-h2 {
+    font-size: 2.5rem;
+    margin: 0;
+    padding: 1rem 0;
+  }
+  
+  h2 {
     font-size: 1.3em;
-}
-
-p {
-    line-height: 1.35em;
-}
-
-/* =================
-      Sections 
-     ================= */
-
-header {
+    font-weight: 600;
+  }
+  
+  p {
+    line-height: 1.5;
+  }
+  
+  /* =================
+        Sections 
+       ================= */
+  
+  header {
     background-color: var(--dark);
     display: flex;
     justify-content: center;
     align-items: center;
     gap: .3em;
-}
-
-header>img {
+    padding: 1rem 0;
+  }
+  
+  header>img {
     height: 26px;
-}
-
-header>a {
+  }
+  
+  header>a {
     color: var(--light);
     font-size: 1.5em;
     text-decoration: none;
-    padding: 1em 0;
-}
-
-header span {
+  }
+  
+  header span {
     font-weight: 700;
-}
-
-main {
+  }
+  
+  main {
     padding: 0 1em;
-}
-
-section {
+  }
+  
+  section {
     margin: 0 auto;
     background-color: var(--light);
     border-radius: var(--border-rad-lg);
-    padding: .25em 1em;
-    box-shadow: 0px 1px 18px 3px var(--dark);
-    max-width: 50vw;
-}
-
-/* =================
-      Setup 
-     ================= */
-
-.setup-inner {
-    display: flex;
-    justify-content: space-around;
-    padding: 1.5em .5em;
-    min-height: 234px;
-}
-
-.setup-inner>img {
+    padding: 1.5rem;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
+    max-width: 55vw;
+  }
+  
+  /* =================
+        Setup 
+       ================= */
+  
+    .setup-inner {
+        display: flex;
+        justify-content: space-around;
+        padding: 1.5rem;
+        min-height: 234px;
+    }
+  
+  .setup-inner>img {
     width: 40%;
     filter: drop-shadow(3px 2px 3px var(--medium-dark));
     align-self: center;
-}
-
-.setup-input-container {
+  }
+  
+  .setup-input-container {
     min-height: 74px;
-}
-
-.speech-bubble-ai {
+  }
+  
+  .speech-bubble-ai {
     max-width: 55%;
     min-height: 124px;
     border-radius: var(--border-rad-lg);
@@ -114,9 +124,10 @@ section {
     align-self: flex-start;
     display: flex;
     align-items: center;
-}
-
-.speech-bubble-ai:before {
+    padding: 1rem;
+  }
+  
+  .speech-bubble-ai:before {
     content: "";
     position: absolute;
     border-left: 9px solid transparent;
@@ -125,9 +136,9 @@ section {
     border-bottom: 9px solid transparent;
     left: -21px;
     top: 64px;
-}
-
-.speech-bubble-ai:after {
+  }
+  
+  .speech-bubble-ai:after {
     content: "";
     position: absolute;
     border-left: 7px solid transparent;
@@ -136,130 +147,175 @@ section {
     border-bottom: 7px solid transparent;
     left: -11px;
     top: 68px;
-}
-
-.speech-bubble-ai>p {
+  }
+  
+  .speech-bubble-ai>p {
     padding: 0 1.3em;
     color: var(--dark);
-    font-size: 85%;
-}
-
-textarea {
+    font-size: 1rem;
+  }
+  
+  textarea,
+  input[type="text"] {
     background-color: var(--light-grey);
-    padding: .8em;
+    padding: .8rem;
     border: none;
-    border-top-right-radius: 0;
-    border-top-left-radius: var(--border-rad-lg);
-    border-bottom-right-radius: 0;
-    border-bottom-left-radius: var(--border-rad-lg);
+    border-radius: var(--border-rad-lg);
     width: 100%;
     resize: none;
     min-height: 40px;
     box-sizing: border-box;
     font-family: 'Poppins', sans-serif;
-}
-
-textarea::placeholder {
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+    transition: box-shadow 0.3s ease-in-out;
+  }
+  
+  textarea:focus,
+  input[type="text"]:focus {
+    outline: none;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+  }
+  
+  textarea::placeholder,
+  input[type="text"]::placeholder {
     color: var(--medium-dark);
-    font-size: 88%;
+    font-size: 0.9rem;
     opacity: 0.8;
-}
-
-/* larger mobiles+ */
-
-@media(min-width: 380px) {
+  }
+  
+  /* larger mobiles+ */
+  
+  @media(min-width: 380px) {
     .setup-input-container {
-        padding-top: 0;
+      padding-top: 0;
     }
-
+  
     .speech-bubble-ai:before {
-        top: 92px;
+      top: 92px;
     }
-
+  
     .speech-bubble-ai:after {
-        top: 96px;
+      top: 96px;
     }
-
+  
     .speech-bubble-ai>p {
-        font-size: 100%;
+      font-size: 1rem;
     }
-
-    textarea::placeholder {
-        font-size: 100%;
-        opacity: 0.8;
+  
+    textarea::placeholder,
+    input[type="text"]::placeholder {
+      font-size: 1rem;
+      opacity: 0.8;
     }
-}
+  }
+  
+  /* =================
+        Selection Buttons
+       ================= */
+  
+      .feelings input[type="checkbox"] + label {
+        background-color: var(--white);
+        padding: 0.5rem 1rem;
+        border-radius: 5px;
+        cursor: pointer;
+      }
+      
+      /* Style for labels when the checkbox is checked */
+      .feelings input[type="checkbox"]:checked + label {
+        background-color: var(--purple);
+        color: var(--white);
+        border: 2px solid var(--green); /* Add a green border */
 
-/* =================
-      Buttons & SVG 
-     ================= */
+        &[for="feelings-type-6"] { /* Sad */
+          background-color: red;
+          border-color: red;
+        }
+      }
 
-
-button {
+    
+  
+  /* =================
+        Buttons & SVG 
+       ================= */
+  
+  button {
     border: none;
-    background: var(--pink);
+    background: var(--blue);
+    color: var(--white);
     cursor: pointer;
-}
-
-button:hover {
+    padding: 0.8rem 1rem;
+    font-size: 1rem;
+    border-radius: var(--border-rad-lg);
+  }
+  
+  button:hover {
     background-color: var(--dark);
-}
-
-.send-btn {
+  }
+  
+  .send-btn {
     border-top-right-radius: var(--border-rad-lg);
     border-bottom-right-radius: var(--border-rad-lg);
     min-width: 50px;
-}
-
-.send-btn>img {
+  }
+  
+  .send-btn>img {
     width: 1.6em;
     vertical-align: middle;
-}
-
-.view-pitch-btn {
+  }
+  
+  .view-pitch-btn {
     color: var(--light);
     border-radius: var(--border-rad-lg);
     padding: 1em;
-    margin: .4em auto;
+    margin: 0.4em auto;
     display: block;
     font-size: 1.2em;
-}
-
-.view-pitch-btn:hover {
+    text-align: center;
+    cursor: pointer;
+    background-color: var(--dark);
+  }
+  
+  .view-pitch-btn:hover {
     box-shadow: 1px 1px 5px 1px var(--medium-dark);
-}
-
-img.loading {
+  }
+  
+  img.loading {
     max-width: 40px;
     filter: none;
-}
-
-/* =================
-      Output 
-     ================= */
-
+  }
+  
+  /* =================
+        Output 
+       ================= */
+  
 .output-container {
-    display: none; 
-    flex-direction: column;
-    margin: 1em auto;
-    color: var(--dark);
-    padding: 1em;
-}
-
+        display: none;
+        flex-direction: column;
+        margin: 1em auto;
+        color: var(--dark);
+        padding: 1em;
+        text-align: center;
+} 
+  
 .output-img-container>img {
-    max-width: 100%;
-    border-radius: var(--border-rad-lg);
-    box-shadow: 1px 1px 5px 1px var(--dark);
+        max-width: 100%;
+        border-radius: var(--border-rad-lg);
+        box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
 }
-
-/* =================
-      Footer 
-     ================= */
-
-footer {
+  
+  /* =================
+        Footer 
+       ================= */
+  
+  footer {
     background-color: var(--dark);
     color: var(--light);
-    padding: .8em;
-    font-size: .7em;
-    text-align: center
-}
+    padding: 0.8em;
+    font-size: 0.7em;
+    text-align: center;
+  }
+  
+  /* Additional Customizations */
+  
+  /* Add any additional customizations here, like adjusting colors, spacing, and font sizes to your liking. */
+  
