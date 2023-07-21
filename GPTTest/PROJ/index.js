@@ -17,7 +17,7 @@ $(window).on('load',function(){
 document.getElementById("send-btn").addEventListener("click", () => {
   var url_wea = url_weather + locText.value + "&appid=" + apik;
   fetchWether(url_wea).then((botReply) => { var we = botReply;
-    console.log(we);
+    
     movieBossText.innerText = `Ok, just wait a second while my digital brain digests that...`;
     var otherThings = setupTextarea.value;
     // loop thru checkboxs id=feelings-type-1, feelings-type-2 ...6 and save their value if checked into an array
@@ -47,8 +47,6 @@ document.getElementById("send-btn").addEventListener("click", () => {
       var food = botReply;
       fetchImagePrompt(food).then((botReply) => {
         var img_desc = botReply;
-        console.log("Image description is "+img_desc)
-        console.log("Food is "+food)
         fetchImageUrl(img_desc).then(() => {
           console.log("Image generated");
         })
@@ -130,23 +128,7 @@ async function fetchImagePrompt(food) {
       },
       body: JSON.stringify({
         'model': 'text-davinci-003',
-        'prompt': `
-        outline : Generate a appetizing description of Maggi 
-        message : A mouthwatering image of Maggi captures slender noodles bathed in a rich golden broth, adorned with vibrant vegetable accents, promising a comforting and delicious experience. The sight entices with its inviting warmth and enticing flavors.
-        ###
-        outline : Generate a appetizing description of biriyani
-        message : A tantalizing picture of biryani showcases fragrant, spiced rice adorned with succulent pieces of tender meat or flavorful vegetables, exuding an irresistible aroma that promises a delightful culinary adventure. The vibrant colors and enticing presentation beckon one to savor the harmonious blend of flavors in this beloved dish.
-        ###
-        outline : Generate a appetizing description of samosa
-        message : A captivating image of samosa presents golden-brown, crispy pastry enveloping a savory filling of spiced potatoes and peas, enticing the taste buds with its crunchy exterior and flavorful interior. The aromatic spices and delightful shape make it an irresistible snack that promises a delightful burst of flavors in every bite.
-        ###
-        outline : Generate a appetizing description of jalebi
-        message : In a tempting portrayal, jalebi graces the frame with its intricate swirls of golden sweetness, enticing the eye with its vibrant hue and glistening syrup. The delectable, crispy yet syrupy texture promises a mouthwatering indulgence, leaving a trail of delightful sugary bliss on the taste buds.                   
-        ###
-        outline : Generate a appetizing description of kulfi
-        message : A captivating picture of kulfi showcases a luscious, creamy dessert, adorned with chopped nuts and saffron strands, enticing one with its rich and indulgent appearance. The frozen treat promises a delightful escape into a world of exquisite flavors, offering a refreshing and satisfying respite from the heat.
-        ### 
-        outline: Generate a appetizing description of ${food}
+        'prompt': `outline: Generate a appetizing description of ${food}
         message: `,
         temperature: 0.8,
         max_tokens: 100
