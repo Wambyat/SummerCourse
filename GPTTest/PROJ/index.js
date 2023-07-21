@@ -10,49 +10,51 @@ const url = 'https://api.openai.com/v1/completions'
 const url1 = 'https://api.openai.com/v1/images/generations'
 const url_weather = 'https://api.openweathermap.org/data/2.5/weather?q='
 const apik = process.apik;
-
 $(window).on('load',function(){
     $("#output-container").css('display','block');
 })
 
 document.getElementById("send-btn").addEventListener("click", () => {
   var url_wea = url_weather + locText.value + "&appid=" + apik;
-  var wea = fetchWether(url_wea);
-  movieBossText.innerText = `Ok, just wait a second while my digital brain digests that...`;
-  var otherThings = setupTextarea.value;
-  // loop thru checkboxs id=feelings-type-1, feelings-type-2 ...6 and save their value if checked into an array
-  var feelings = [];
-  for (var i = 1; i <= 6; i++) {
-    if (document.getElementById("feelings-type-" + i).checked) {
-      feelings.push(document.getElementById("feelings-type-" + i).value);
+  fetchWether(url_wea).then((botReply) => { var we = botReply;
+    console.log(we);
+    movieBossText.innerText = `Ok, just wait a second while my digital brain digests that...`;
+    var otherThings = setupTextarea.value;
+    // loop thru checkboxs id=feelings-type-1, feelings-type-2 ...6 and save their value if checked into an array
+    var feelings = [];
+    for (var i = 1; i <= 6; i++) {
+      if (document.getElementById("feelings-type-" + i).checked) {
+        feelings.push(document.getElementById("feelings-type-" + i).value);
+      }
     }
-  }
-  var foodType = [];
-  for (var i = 1; i <= 6; i++) {
-    if (document.getElementById("food-type-" + i).checked) {
-      foodType.push(document.getElementById("food-type-" + i).value);
+    var foodType = [];
+    for (var i = 1; i <= 6; i++) {
+      if (document.getElementById("food-type-" + i).checked) {
+        foodType.push(document.getElementById("food-type-" + i).value);
+      }
     }
-  }
-  console.log(foodType);
-  console.log(locText.value);
-  console.log(otherThings);
-  console.log(feelings);
-
-  var prompt =  "Generate a food suggestion based on the below feelings such as I live in "+ locText.value + " and the temperature here is "+wea+" , I feel " + feelings + " and want to eat " + foodType +" food.  "+ otherThings + ".say only the name of the food dont say anything else"
-
-  console.log(prompt)
+    const rndInt = Math.floor(Math.random() * 35) + 16
+    we = rndInt+'C and windy'
+    console.log(foodType);
+    console.log(locText.value);
+    console.log(otherThings);
+    console.log(feelings);
   
-  fetchBotReply(prompt).then((botReply) => {
-    var food = botReply;
-    fetchImagePrompt(food).then((botReply) => {
-      var img_desc = botReply;
-      console.log("Image description is "+img_desc)
-      console.log("Food is "+food)
-      fetchImageUrl(img_desc).then(() => {
-        console.log("Image generated");
+    var prompt =  "Generate a food suggestion based on the below feelings such as I live in "+ locText.value + " and the temperature here is "+we+" , I feel " + feelings + " and want to eat " + foodType +" food.  "+ otherThings + ".say only the name of the food dont say anything else"
+    console.log(prompt)
+    
+    fetchBotReply(prompt).then((botReply) => {
+      var food = botReply;
+      fetchImagePrompt(food).then((botReply) => {
+        var img_desc = botReply;
+        console.log("Image description is "+img_desc)
+        console.log("Food is "+food)
+        fetchImageUrl(img_desc).then(() => {
+          console.log("Image generated");
+        })
       })
     })
-  })
+  });
 })
 
 async function fetchWether(url_wea){
@@ -114,7 +116,6 @@ function sleep(ms) {
 
 async function fetchImagePrompt(food) {
   try {
-    console.log("food is "+food)
     const response = await fetchAPI(url, {
       method: 'POST',
       headers: {
