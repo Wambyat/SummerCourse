@@ -130,7 +130,7 @@ async function fetchImagePrompt(food) {
       },
       body: JSON.stringify({
         'model': 'text-davinci-003',
-        ###
+        'prompt': `
         outline : Generate a appetizing description of Maggi 
         message : A mouthwatering image of Maggi captures slender noodles bathed in a rich golden broth, adorned with vibrant vegetable accents, promising a comforting and delicious experience. The sight entices with its inviting warmth and enticing flavors.
         ###
@@ -146,7 +146,8 @@ async function fetchImagePrompt(food) {
         outline : Generate a appetizing description of kulfi
         message : A captivating picture of kulfi showcases a luscious, creamy dessert, adorned with chopped nuts and saffron strands, enticing one with its rich and indulgent appearance. The frozen treat promises a delightful escape into a world of exquisite flavors, offering a refreshing and satisfying respite from the heat.
         ### 
-        'prompt': `Generate a appetizing description of ${food}`,
+        outline: Generate a appetizing description of ${food}
+        message: `,
         temperature: 0.8,
         max_tokens: 100
       })
