@@ -8,12 +8,16 @@ const OPENAI_API_KEY1 = process.OPENAI_API_KEY1;
 const OPENAI_API_KEY2 = process.OPENAI_API_KEY2;
 const url = 'https://api.openai.com/v1/completions'
 const url1 = 'https://api.openai.com/v1/images/generations'
+const url_weather = 'https://api.openweathermap.org/data/2.5/weather?q='
+const apik = process.apik;
 
 $(window).on('load',function(){
     $("#output-container").css('display','block');
 })
 
 document.getElementById("send-btn").addEventListener("click", () => {
+  var url_wea = url_weather + locText.value + "&appid=" + apik;
+  var wea = fetchWether(url_wea);
   movieBossText.innerText = `Ok, just wait a second while my digital brain digests that...`;
   var otherThings = setupTextarea.value;
   // loop thru checkboxs id=feelings-type-1, feelings-type-2 ...6 and save their value if checked into an array
@@ -34,7 +38,7 @@ document.getElementById("send-btn").addEventListener("click", () => {
   console.log(otherThings);
   console.log(feelings);
 
-  var prompt =  "Generate a food suggestion based on the below feelings such as I live in "+ locText.value + " and the temperature here is 20 degrees celsius , I feel " + feelings + " and want to eat " + foodType +" food.  "+ otherThings + ".say only the name of the food dont say anything else"
+  var prompt =  "Generate a food suggestion based on the below feelings such as I live in "+ locText.value + " and the temperature here is "+wea+" , I feel " + feelings + " and want to eat " + foodType +" food.  "+ otherThings + ".say only the name of the food dont say anything else"
 
   console.log(prompt)
   
@@ -50,6 +54,14 @@ document.getElementById("send-btn").addEventListener("click", () => {
     })
   })
 })
+
+async function fetchWether(url_wea){
+  fetch(url_wea).then(response => response.json()).then(data => {
+    var temp = data['main']['temp'];
+    var wndspd = data['wind']['speed'];
+    return temp +" "+ wndspd;
+  })
+}
 
 async function fetchBotReply(prompt){
     //var prompttext = $("#setup-textarea").val();
