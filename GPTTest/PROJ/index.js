@@ -100,8 +100,37 @@ async function fetchBotReply(prompt){
         setTimeout(function(){
           movieBossText.innerText = data.choices[0].text;
           var m = document.getElementById('movie-boss-text').textContent;
-          console.log("calling desc maker with "+m);
-          fetchImagePrompt(m);
+          console.log("calling recipe maker with "+m);
+          document.getElementById("output-title").innerHTML = m;
+          fetchRecipe(m);
+        },1000)
+      }
+    )
+  }catch (error) {
+    console.error("Error:", error);
+  }
+}
+
+async function fetchRecipe(food){
+  var prompttext = food;
+  try {
+    const response = await fetchAPI(url, {
+      method: 'POST',
+      headers: {
+        "Content-Type": "application/json",
+        "Authorization": "Bearer " + OPENAI_API_KEY0
+      },
+      body: JSON.stringify({
+        'model': 'text-davinci-003',
+        'prompt': `tell me how to cook ${prompttext} in 5 short sentences`,
+        'max_tokens' : 100,
+      })
+    }).then(response => response.json()).then(data =>{
+        setTimeout(function(){
+          console.log("calling desc maker with "+food);
+          document.getElementById("output-text").innerHTML = data.choices[0].text;
+          console.log("Recipe is: "+data.choices[0].text);
+          fetchImagePrompt(food);
         },1000)
       }
     )
@@ -171,7 +200,7 @@ async function fetchImageUrl(imagePrompt){
     if (data.data && data.data.length > 0) {
       document.getElementById('output-img-container').innerHTML = `<img src="data:image/png;base64,${data.data[0].b64_json}">`;
       
-      document.getElementById("output-title").innerHTML = imagePrompt;
+      document.getElementById("output-desc").innerHTML = imagePrompt;
     }
   })
 }
