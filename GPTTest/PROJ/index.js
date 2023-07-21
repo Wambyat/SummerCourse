@@ -41,17 +41,18 @@ document.getElementById("send-btn").addEventListener("click", () => {
     console.log(feelings);
   
     var prompt =  "Generate a food suggestion based on the below feelings such as I live in "+ locText.value + " and the temperature here is "+we+" , I feel " + feelings + " and want to eat " + foodType +" food.  "+ otherThings + ".say only the name of the food dont say anything else"
-    console.log(prompt)
-    
-    fetchBotReply(prompt).then((botReply) => {
-      var food = botReply;
-      fetchImagePrompt(food).then((botReply) => {
-        var img_desc = botReply;
-        fetchImageUrl(img_desc).then(() => {
-          console.log("Image generated");
-        })
-      })
-    })
+  
+    fetchBotReply(prompt);
+    // fetchBotReply(prompt).then((botReply) => {
+    //   var food = botReply;
+    //   console.log(food);
+    //   fetchImagePrompt(food).then((botReply) => {
+    //     var img_desc = botReply;
+    //     fetchImageUrl(img_desc).then(() => {
+    //       console.log("Image generated");
+    //     })
+    //   })
+    // })
   });
 })
 
@@ -64,13 +65,13 @@ async function fetchWether(url_wea){
 }
 
 async function fetchBotReply(prompt){
-    //var prompttext = $("#setup-textarea").val();
-    var prompttext = prompt;
-    fetch(url,{
+  var prompttext = prompt;
+  try {
+    const response = await fetchAPI(url, {
       method: 'POST',
       headers: {
-        'Content-Type': 'application/json',
-        'Authorization': `Bearer ${OPENAI_API_KEY0}`
+        "Content-Type": "application/json",
+        "Authorization": "Bearer " + OPENAI_API_KEY0
       },
       body: JSON.stringify({
         'model': 'text-davinci-003',
@@ -91,16 +92,22 @@ async function fetchBotReply(prompt){
         outline : Generate a food suggestion based on the below feelings such as I live in mysore and the temperature here is 29 degrees celsius , I feel Sad and want to eat Indulgent food.  ntg.say only the name of the food dont say anything else
         message : Chocolate Brownie
         ###
-        outline: 
-        message: ${prompttext} `,
+        outline: ${prompttext}
+        message:  `,
         'max_tokens' : 100,
       })
     }).then(response => response.json()).then(data =>{
         setTimeout(function(){
-            return data.choices[0].text
+          movieBossText.innerText = data.choices[0].text;
+          var m = document.getElementById('movie-boss-text').textContent;
+          console.log("calling desc maker with "+m);
+          fetchImagePrompt(m);
         },1000)
       }
     )
+  }catch (error) {
+    console.error("Error:", error);
+  }
 }
 
 async function fetchAPI(url, options) {
@@ -136,6 +143,8 @@ async function fetchImagePrompt(food) {
     });
     const data = await response.json();
     const imagePrompt = data.choices[0].text.trim();
+    console.log("calling img maker with: "+imagePrompt);
+    fetchImageUrl(imagePrompt);
     return imagePrompt;
   } catch (error) {
     console.error("Error:", error);
@@ -161,6 +170,7 @@ async function fetchImageUrl(imagePrompt){
   .then(data => {
     if (data.data && data.data.length > 0) {
       document.getElementById('output-img-container').innerHTML = `<img src="data:image/png;base64,${data.data[0].b64_json}">`;
+      
       document.getElementById("output-title").innerHTML = imagePrompt;
     }
   })
