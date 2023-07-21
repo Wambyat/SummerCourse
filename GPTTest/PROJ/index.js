@@ -77,7 +77,7 @@ async function fetchBotReply(prompt){
         'model': 'text-davinci-003',
         'prompt': `Generate feedback to enthusiastically say an outline looks interesting and that you need some minutes to think about it.
         ###
-        outline : Generate a food suggestion based on the below feelings such as I live in bengaluru  and the temperature here is 20 degrees celsius , I feel Depressed,Cold/Cough and want to eat Energizing food.  i have thyroid.say only the name of the food dont say anything else.
+        outline : Generate a food suggestion based on the below feelings such as I live in bengaluru  and the temperature here is 20 degrees celsius , I feel Depressed,Cold/Cough and want to eat Energizing food.  i have thyroid.say only the name of the food dont say anaything else.
         message : Quinoa Salad
         ###
         outline : Generate a food suggestion based on the below feelings such as I live in delhi and the temperature here is 10 degrees celsius , I feel Nauseous,Sad and want to eat Comforting food.  i want high protein food.say only the name of the food dont say anything else
