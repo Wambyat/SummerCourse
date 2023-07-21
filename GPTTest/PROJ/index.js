@@ -64,14 +64,20 @@ async function fetchBotReply(prompt){
         'model': 'text-davinci-003',
         'prompt': `Generate feedback to enthusiastically say an outline looks interesting and that you need some minutes to think about it.
         ###
-        outline: Two dogs fall in love and move to hawaii and learn to surf
-        message: i will need to think about that but the idea is amazing. i love the bit about hawaii.
+        outline : Generate a food suggestion based on the below feelings such as I live in bengaluru  and the temperature here is 20 degrees celsius , I feel Depressed,Cold/Cough and want to eat Energizing food.  i have thyroid.say only the name of the food dont say anything else.
+        message : Quinoa Salad
         ###
-        outline: a plane crashes in the jungle and passengers have to walk 100 kms to safety
-        message: i'll spend a few moments considering that but i love your ideea. a disaster movie in the jungle.
+        outline : Generate a food suggestion based on the below feelings such as I live in delhi and the temperature here is 10 degrees celsius , I feel Nauseous,Sad and want to eat Comforting food.  i want high protein food.say only the name of the food dont say anything else
+        message : Chicken Soup
         ###
-        outline:a group of corrupt lawyers trying to dsenf an innocent women to jail.
-        message: now that is awesome! corrupt lawyers huh? give me a few moments to think.
+        outline : Generate a food suggestion based on the below feelings such as I live in gujarat and the temperature here is 34 degrees celsius , I feel Hungry,Happy and want to eat Filling food.  i want junk food.say only the name of the food dont say anything else
+        message : Pav Bhaji
+        ###
+        outline : Generate a food suggestion based on the below feelings such as I live in kashmir and the temperature here is 07 degrees celsius , I feel Cold/Cough and want to eat Comforting food.  i want something hot and spicy.say only the name of the food dont say anything else
+        message : Kashmiri Kahwa
+        ###
+        outline : Generate a food suggestion based on the below feelings such as I live in mysore and the temperature here is 29 degrees celsius , I feel Sad and want to eat Indulgent food.  ntg.say only the name of the food dont say anything else
+        message : Chocolate Brownie
         ###
         outline: 
         message: ${prompttext} `,
